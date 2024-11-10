@@ -123,6 +123,28 @@ function listenOnBoardHovering() {
   });
 }
 
+function handleCellClick(coordinates, ship) {
+  const placed = player.gameboard.placeShip(ship, coordinates, axis);
+  if (placed) {
+    numberOfShipsLeftToPlace -= 1;
+  }
+
+  if (numberOfShipsLeftToPlace === 0) {
+    updateGameView(player, computer, playerTurn, gameOver);
+    return;
+  }
+
+  renderPlacingShipsInterface(player.gameboard, axis);
+  listenOnBoardHovering();
+  listenOnShipDirectionChange();
+}
+
+export function listenOnCellClick(cell, coordinates, ship) {
+  cell.addEventListener('click', () => {
+    handleCellClick(coordinates, ship);
+  });
+}
+
 function listenOnShipDirectionChange() {
   const shipDirection = document.querySelector('.ship-direction');
   shipDirection.addEventListener('click', () => {
