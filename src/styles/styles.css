@@ -194,7 +194,7 @@ main {
 
 .status-container {
   background: rgba(94, 114, 170, 0.4);
-  height: 40px;
+  height: fit-content;
   padding: 25px 40px;
   border-radius: 4px;
   margin: 20px auto 0 auto;
@@ -202,6 +202,10 @@ main {
   align-items: center;
   justify-content: center;
   width: 300px;
+}
+
+.status {
+  font-size: 1.1rem;
 }
 
 .status,
@@ -298,13 +302,12 @@ footer a:active {
     gap: 1px;
   }
 
-  .board-title,
-  .status-container {
+  .board-title {
     font-size: 1.4rem;
   }
 
-  .status-container {
-    height: 50px;
+  .status {
+    font-size: 1.3rem;
   }
 }
 
