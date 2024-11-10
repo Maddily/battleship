@@ -340,3 +340,22 @@ function createRestartButton() {
 
   return restartButton;
 }
+
+export function announceWinner(name = undefined) {
+  clearMain();
+
+  let messageText;
+
+  if (name) {
+    messageText = `Victory! Captain ${name} has conquered the seas!`;
+  } else {
+    messageText = `Defeat... our fleet has been vanquished.`;
+  }
+
+  const message = document.createElement('p');
+  message.className = 'game-end-message';
+  message.textContent = messageText;
+
+  const main = document.querySelector('main');
+  main.append(message, createRestartButton());
+}
