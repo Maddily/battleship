@@ -318,3 +318,17 @@ function renderComputerBoard(computerBoard) {
 
   return computerBoardContainer;
 }
+
+export function updateGameView(player, computer, playerTurn, gameOver) {
+  if (gameOver) return;
+
+  clearMain();
+  renderBoards(player.gameboard, computer.gameboard);
+  renderStatus(player.name);
+
+  if (playerTurn) {
+    listenOnEnemyBoardAttack();
+  } else {
+    attackPlayerBoard();
+  }
+}
