@@ -8,8 +8,12 @@ import {
   delayRendering,
 } from './utils.js';
 import {
+  announceWinner,
+  updateStatus,
   renderPlacingShipsInterface,
   handleHovering,
+  updateGameView,
+  toggleEnemyBoardInteraction,
 } from './dom.js';
 
 let player, computer;
