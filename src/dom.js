@@ -200,3 +200,8 @@ export function handleHovering(e, numberOfShipsLeftToPlace, player, axis, placeS
     }
   }
 }
+
+export function clearMain() {
+  const main = document.querySelector('main');
+  main.innerHTML = '';
+}
