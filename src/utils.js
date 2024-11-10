@@ -53,3 +53,7 @@ export function findRandomUnattackedCell(playerBoard) {
 
   return [i, j];
 }
+
+export function delayRendering(callback) {
+  setTimeout(callback, 1000);
+}
