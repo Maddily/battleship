@@ -332,3 +332,11 @@ export function updateGameView(player, computer, playerTurn, gameOver) {
     attackPlayerBoard();
   }
 }
+
+function createRestartButton() {
+  const restartButton = document.createElement('button');
+  restartButton.className = 'restart';
+  restartButton.textContent = 'Battle Again';
+
+  return restartButton;
+}
