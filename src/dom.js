@@ -224,3 +224,97 @@ export function updateStatus() {
   const status = document.querySelector('.status');
   status.textContent = 'Incoming… hold steady!';
 }
+
+export function renderBoards(playerBoard, computerBoard) {
+  const playerBoardContainer = renderPlayerBoard(playerBoard);
+  const computerBoardContainer = renderComputerBoard(computerBoard);
+
+  const boardsContainer = document.createElement('section');
+  boardsContainer.className = 'boards-container';
+  boardsContainer.append(playerBoardContainer, computerBoardContainer);
+
+  const main = document.querySelector('main');
+  main.appendChild(boardsContainer);
+}
+
+function renderPlayerBoard(playerBoard) {
+  const playerBoardTitle = document.createElement('p');
+  playerBoardTitle.className = 'player-board-title board-title';
+  playerBoardTitle.textContent = 'Your Fleet';
+
+  const playerGameBoard = document.createElement('div');
+  playerGameBoard.className = 'player-board board';
+
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      cell.setAttribute('data-coordinates', `${i},${j}`);
+
+      // If these coordinates are in the missed attacks array, mark the square
+      const missedAttack = playerBoard.missedAttacks.some(
+        (coordinates) => coordinates[0] === i && coordinates[1] === j
+      );
+
+      if (missedAttack) {
+        cell.classList.add('missed');
+      }
+
+      if (playerBoard.board[i][j] !== null) {
+        cell.classList.add('occupied');
+
+        // Mark the square if it's been hit
+        if (playerBoard.board[i][j].hit) {
+          cell.classList.add('hit');
+        }
+      }
+
+      playerGameBoard.appendChild(cell);
+    }
+  }
+
+  const playerBoardContainer = document.createElement('article');
+  playerBoardContainer.className = 'player-board-container board-container';
+  playerBoardContainer.append(playerBoardTitle, playerGameBoard);
+
+  return playerBoardContainer;
+}
+
+function renderComputerBoard(computerBoard) {
+  const computerBoardTitle = document.createElement('p');
+  computerBoardTitle.className = 'computer-board-title board-title';
+  computerBoardTitle.textContent = 'Enemy Waters';
+
+  const computerGameBoard = document.createElement('div');
+  computerGameBoard.className = 'computer-board board';
+
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      const cell = document.createElement('div');
+      cell.className = 'enemy-cell cell';
+      cell.setAttribute('data-coordinates', `${i},${j}`);
+
+      // Mark the square if it has a missed attack
+      const missedAttack = computerBoard.missedAttacks.some(
+        (coordinates) => coordinates[0] === i && coordinates[1] === j
+      );
+
+      if (missedAttack) {
+        cell.classList.add('missed');
+      }
+
+      // Mark the square if it's been hit
+      if (computerBoard.board[i][j] !== null && computerBoard.board[i][j].hit) {
+        cell.classList.add('hit');
+      }
+
+      computerGameBoard.appendChild(cell);
+    }
+  }
+
+  const computerBoardContainer = document.createElement('article');
+  computerBoardContainer.className = 'computer-board-container board-container';
+  computerBoardContainer.append(computerBoardTitle, computerGameBoard);
+
+  return computerBoardContainer;
+}
