@@ -205,3 +205,22 @@ export function clearMain() {
   const main = document.querySelector('main');
   main.innerHTML = '';
 }
+
+export function renderStatus(name) {
+  const statusContainer = document.createElement('section');
+  statusContainer.className = 'status-container';
+
+  const status = document.createElement('p');
+  status.className = 'status';
+  status.textContent = `Standing by for your command, Captain ${name}...`;
+
+  statusContainer.appendChild(status);
+
+  const main = document.querySelector('main');
+  main.appendChild(statusContainer);
+}
+
+export function updateStatus() {
+  const status = document.querySelector('.status');
+  status.textContent = 'Incoming… hold steady!';
+}
