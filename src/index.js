@@ -107,6 +107,13 @@ function handleAttack(board, coordinates) {
   }
 }
 
+function listenOnRestartGameButton() {
+  const restartGame = document.querySelector('.restart');
+  restartGame.addEventListener('click', () => {
+    window.location.reload();
+  });
+}
+
 // Listen on hovering action on the board to place ships
 function listenOnBoardHovering() {
   const placeShipsBoardContainer = document.querySelector(
