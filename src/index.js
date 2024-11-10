@@ -47,6 +47,25 @@ startButton.addEventListener('click', () => {
   handleNameInput();
 });
 
+function handleAttack(board, coordinates) {
+  board.receiveAttack(coordinates);
+
+  if (!playerTurn) {
+    playerTurn = true;
+    delayRendering(() =>
+      updateGameView(player, computer, playerTurn, gameOver)
+    );
+  } else {
+    updateGameView(player, computer, playerTurn, gameOver);
+  }
+
+  if (board.allSunk) {
+    gameOver = true;
+    announceWinner(player.gameboard.allSunk ? undefined : player.name);
+    listenOnRestartGameButton();
+  }
+}
+
 // Listen on hovering action on the board to place ships
 function listenOnBoardHovering() {
   const placeShipsBoardContainer = document.querySelector(
