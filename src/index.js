@@ -47,6 +47,33 @@ startButton.addEventListener('click', () => {
   handleNameInput();
 });
 
+function handleEnemyBoardClick(e) {
+  const enemyCell = e.target.closest('.enemy-cell');
+
+  if (enemyCell) {
+    if (isAlreadyAttacked(enemyCell)) return;
+
+    const coordinates = enemyCell.dataset.coordinates
+      .split(',')
+      .map((number) => number * 1);
+
+    handleAttack(computer.gameboard, coordinates);
+
+    playerTurn = false;
+    attackPlayerBoard();
+    listenOnEnemyBoardAttack();
+  }
+}
+
+export function listenOnEnemyBoardAttack() {
+  if (!playerTurn) return;
+
+  const enemyBoard = document.querySelector('.computer-board');
+  if (enemyBoard) {
+    enemyBoard.addEventListener('click', handleEnemyBoardClick);
+  }
+}
+
 function handleAttack(board, coordinates) {
   board.receiveAttack(coordinates);
 
