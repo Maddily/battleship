@@ -74,6 +74,20 @@ export function listenOnEnemyBoardAttack() {
   }
 }
 
+export function attackPlayerBoard() {
+  const playerBoard = document.querySelector('.player-board');
+  if (playerBoard) {
+    toggleEnemyBoardInteraction();
+
+    // Generate random coordinates
+    const coordinatesToAttack = findRandomUnattackedCell(playerBoard);
+
+    updateStatus();
+
+    handleAttack(player.gameboard, coordinatesToAttack);
+  }
+}
+
 function handleAttack(board, coordinates) {
   board.receiveAttack(coordinates);
 
