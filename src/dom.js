@@ -359,3 +359,8 @@ export function announceWinner(name = undefined) {
   const main = document.querySelector('main');
   main.append(message, createRestartButton());
 }
+
+export function toggleEnemyBoardInteraction() {
+  const enemyBoard = document.querySelector('.computer-board');
+  enemyBoard.classList.toggle('clickable');
+}
